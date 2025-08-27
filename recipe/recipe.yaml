@@ -158,24 +158,8 @@ outputs:
     requirements:
       run:
         - ${{ pin_subpackage("linkml", exact=True) }}
+        - pandas
         - pandera
-    tests:
-      - python:
-          imports: linkml
-          pip_check: true
-          python_version:
-            - ${{ python_min }}.*
-            - ${{ python_check_max }}.*
-    about:
-      summary: Linked Open Data Modeling Language (with pandera)
-
-  - package:
-      name: linkml-with-polars-lts-cpu
-    build:
-      noarch: generic
-    requirements:
-      run:
-        - ${{ pin_subpackage("linkml", exact=True) }}
         - polars-lts-cpu
     tests:
       - python:
@@ -185,7 +169,7 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
     about:
-      summary: Linked Open Data Modeling Language (with polars)
+      summary: Linked Open Data Modeling Language (with pandera)
 
   - package:
       name: linkml-with-pyshacl
@@ -212,10 +196,9 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("linkml-with-numpydantic",    exact=True) }}
-        - ${{ pin_subpackage("linkml-with-pandera",        exact=True) }}
-        - ${{ pin_subpackage("linkml-with-polars-lts-cpu", exact=True) }}
-        - ${{ pin_subpackage("linkml-with-pyshacl",        exact=True) }}
+        - ${{ pin_subpackage("linkml-with-numpydantic", exact=True) }}
+        - ${{ pin_subpackage("linkml-with-pandera", exact=True) }}
+        - ${{ pin_subpackage("linkml-with-pyshacl", exact=True) }}
     tests:
       - python:
           imports: linkml
