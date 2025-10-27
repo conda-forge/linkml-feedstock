@@ -3,7 +3,7 @@ schema_version: 1
 
 context:
   version: "1.9.5"
-  python_check_max: "3.13"
+  python_check_max: "3.14"
   linkml_runtime_min: "1.9.5"
   numpydantic_min: "1.6.1"
   pandera_min: "0.19.0"
@@ -76,7 +76,7 @@ outputs:
           - gen-yaml = linkml.generators.yamlgen:cli
           - gen-yuml = linkml.generators.yumlgen:cli
           - linkml = linkml.cli.main:linkml
-          - linkml-convert = linkml.utils.converter:cli
+          - linkml-convert = linkml.converter.cli:cli
           - linkml-jsonschema-validate = linkml.validators.jsonschemavalidator:cli
           - linkml-lint = linkml.linter.cli:main
           - linkml-run-examples = linkml.workspaces.example_runner:cli
@@ -124,6 +124,8 @@ outputs:
         - pandera >=${{ pandera_min }}
         - polars-lts-cpu >=${{ polars_lts_cpu_min }}
         - pyshacl >=${{ pyshacl_min }}
+        # remove after https://github.com/conda-forge/sphinx-click-feedstock/pull/41
+        - sphinx-click !=6.1.0=*=*_0
     tests:
       - python:
           imports: linkml
