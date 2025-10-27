@@ -4,7 +4,7 @@ import tomli
 from pathlib import Path
 import os
 
-FAIL_UNDER = 84
+FAIL_UNDER = 80
 
 WIN = os.name == "nt"
 

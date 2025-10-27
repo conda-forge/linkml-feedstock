@@ -2,8 +2,8 @@
 schema_version: 1
 
 context:
-  version: "1.9.4"
-  python_check_max: "3.13"
+  version: "1.9.5"
+  python_check_max: "3.14"
   linkml_runtime_min: "1.9.5"
   numpydantic_min: "1.6.1"
   pandera_min: "0.19.0"
@@ -16,10 +16,10 @@ recipe:
 
 source:
   - url: https://pypi.org/packages/source/l/linkml/linkml-${{ version }}.tar.gz
-    sha256: b5075a697bfdb6ef829e19e15046f6efc11a946352eb7f5024e89f710ebd96ca
+    sha256: 736765dfdf35054497452771f8fd5653f7a2b6aec735b4e9e8171730ddf93582
     target_directory: dist
   - url: https://github.com/linkml/linkml/archive/refs/tags/v${{ version }}.tar.gz
-    sha256: fc9a97322c27508e6fd238e0da5b30ca4eea387e1cf298b8800ab605cbac130b
+    sha256: 6015541f15297559b6356220b313f5037b46aa141ad88ca45f03037f6030354e
     target_directory: src
 
 build:
@@ -76,7 +76,7 @@ outputs:
           - gen-yaml = linkml.generators.yamlgen:cli
           - gen-yuml = linkml.generators.yumlgen:cli
           - linkml = linkml.cli.main:linkml
-          - linkml-convert = linkml.utils.converter:cli
+          - linkml-convert = linkml.converter.cli:cli
           - linkml-jsonschema-validate = linkml.validators.jsonschemavalidator:cli
           - linkml-lint = linkml.linter.cli:main
           - linkml-run-examples = linkml.workspaces.example_runner:cli
@@ -124,6 +124,8 @@ outputs:
         - pandera >=${{ pandera_min }}
         - polars-lts-cpu >=${{ polars_lts_cpu_min }}
         - pyshacl >=${{ pyshacl_min }}
+        # remove after https://github.com/conda-forge/sphinx-click-feedstock/pull/41
+        - sphinx-click !=6.1.0 *_0
     tests:
       - python:
           imports: linkml
@@ -239,6 +241,7 @@ outputs:
         requirements:
           run:
             - coverage >=6.4.1,<7.0.0
+            - gql >=4.0.0
             - jsonpatch >=1.33.0,<2.0.0
             - mock >=5.1.0,<6
             - nbconvert
@@ -250,7 +253,6 @@ outputs:
             - tomli
         script:
           file: run_test.py
-          interpreter: python
     about:
       summary: Linked Open Data Modeling Language (with test suite)
 
