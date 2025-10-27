@@ -125,7 +125,7 @@ outputs:
         - polars-lts-cpu >=${{ polars_lts_cpu_min }}
         - pyshacl >=${{ pyshacl_min }}
         # remove after https://github.com/conda-forge/sphinx-click-feedstock/pull/41
-        - sphinx-click !=6.1.0=*=*_0
+        - sphinx-click !=6.1.0 *_0
     tests:
       - python:
           imports: linkml
@@ -241,6 +241,7 @@ outputs:
         requirements:
           run:
             - coverage >=6.4.1,<7.0.0
+            - gql >=4.0.0
             - jsonpatch >=1.33.0,<2.0.0
             - mock >=5.1.0,<6
             - nbconvert
@@ -252,7 +253,6 @@ outputs:
             - tomli
         script:
           file: run_test.py
-          interpreter: python
     about:
       summary: Linked Open Data Modeling Language (with test suite)
 
