@@ -17,10 +17,10 @@ Development: https://github.com/linkml/linkml
 
 Documentation: https://linkml.io/linkml
 
-LinkML is a flexible modeling language that allows you to author schemas in 
-YAML that describe the structure of your data. Additionally, it is a 
-framework for working with and validating data in a variety of formats 
-(JSON, RDF, TSV), with generators for compiling LinkML schemas to other 
+LinkML is a flexible modeling language that allows you to author schemas in
+YAML that describe the structure of your data. Additionally, it is a
+framework for working with and validating data in a variety of formats
+(JSON, RDF, TSV), with generators for compiling LinkML schemas to other
 frameworks.
 
 About linkml
@@ -36,10 +36,10 @@ Development: https://github.com/linkml/linkml
 
 Documentation: https://linkml.io/linkml
 
-LinkML is a flexible modeling language that allows you to author schemas in 
-YAML that describe the structure of your data. Additionally, it is a 
-framework for working with and validating data in a variety of formats 
-(JSON, RDF, TSV), with generators for compiling LinkML schemas to other 
+LinkML is a flexible modeling language that allows you to author schemas in
+YAML that describe the structure of your data. Additionally, it is a
+framework for working with and validating data in a variety of formats
+(JSON, RDF, TSV), with generators for compiling LinkML schemas to other
 frameworks.
 
 About linkml-with-all
@@ -55,10 +55,10 @@ Development: https://github.com/linkml/linkml
 
 Documentation: https://linkml.io/linkml
 
-LinkML is a flexible modeling language that allows you to author schemas in 
-YAML that describe the structure of your data. Additionally, it is a 
-framework for working with and validating data in a variety of formats 
-(JSON, RDF, TSV), with generators for compiling LinkML schemas to other 
+LinkML is a flexible modeling language that allows you to author schemas in
+YAML that describe the structure of your data. Additionally, it is a
+framework for working with and validating data in a variety of formats
+(JSON, RDF, TSV), with generators for compiling LinkML schemas to other
 frameworks.
 
 About linkml-with-numpydantic
@@ -74,10 +74,10 @@ Development: https://github.com/linkml/linkml
 
 Documentation: https://linkml.io/linkml
 
-LinkML is a flexible modeling language that allows you to author schemas in 
-YAML that describe the structure of your data. Additionally, it is a 
-framework for working with and validating data in a variety of formats 
-(JSON, RDF, TSV), with generators for compiling LinkML schemas to other 
+LinkML is a flexible modeling language that allows you to author schemas in
+YAML that describe the structure of your data. Additionally, it is a
+framework for working with and validating data in a variety of formats
+(JSON, RDF, TSV), with generators for compiling LinkML schemas to other
 frameworks.
 
 About linkml-with-pandera
@@ -93,10 +93,10 @@ Development: https://github.com/linkml/linkml
 
 Documentation: https://linkml.io/linkml
 
-LinkML is a flexible modeling language that allows you to author schemas in 
-YAML that describe the structure of your data. Additionally, it is a 
-framework for working with and validating data in a variety of formats 
-(JSON, RDF, TSV), with generators for compiling LinkML schemas to other 
+LinkML is a flexible modeling language that allows you to author schemas in
+YAML that describe the structure of your data. Additionally, it is a
+framework for working with and validating data in a variety of formats
+(JSON, RDF, TSV), with generators for compiling LinkML schemas to other
 frameworks.
 
 About linkml-with-pyshacl
@@ -112,10 +112,10 @@ Development: https://github.com/linkml/linkml
 
 Documentation: https://linkml.io/linkml
 
-LinkML is a flexible modeling language that allows you to author schemas in 
-YAML that describe the structure of your data. Additionally, it is a 
-framework for working with and validating data in a variety of formats 
-(JSON, RDF, TSV), with generators for compiling LinkML schemas to other 
+LinkML is a flexible modeling language that allows you to author schemas in
+YAML that describe the structure of your data. Additionally, it is a
+framework for working with and validating data in a variety of formats
+(JSON, RDF, TSV), with generators for compiling LinkML schemas to other
 frameworks.
 
 Current build status

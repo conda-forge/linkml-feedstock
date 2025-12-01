@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "1.9.5"
+  version: "1.9.6"
   python_check_max: "3.14"
   linkml_runtime_min: "1.9.5"
   numpydantic_min: "1.6.1"
@@ -16,10 +16,10 @@ recipe:
 
 source:
   - url: https://pypi.org/packages/source/l/linkml/linkml-${{ version }}.tar.gz
-    sha256: 736765dfdf35054497452771f8fd5653f7a2b6aec735b4e9e8171730ddf93582
+    sha256: d2ef74bbb52bf5e48b67b5d9319ca2e4acb8184dd40bf43d00635222b2dc1d4c
     target_directory: dist
   - url: https://github.com/linkml/linkml/archive/refs/tags/v${{ version }}.tar.gz
-    sha256: 6015541f15297559b6356220b313f5037b46aa141ad88ca45f03037f6030354e
+    sha256: 81606d9131eecd771c9fd215ebf7cd103bce43b8d77df27dd3f70a2cf61b4c85
     target_directory: src
 
 build:
@@ -63,6 +63,7 @@ outputs:
           - gen-pydantic = linkml.generators.pydanticgen:cli
           - gen-python = linkml.generators.pythongen:cli
           - gen-rdf = linkml.generators.rdfgen:cli
+          - gen-rust = linkml.generators.rustgen.cli:cli
           - gen-shacl = linkml.generators.shaclgen:cli
           - gen-shex = linkml.generators.shexgen:cli
           - gen-sparql = linkml.generators.sparqlgen:cli
@@ -73,6 +74,7 @@ outputs:
           - gen-summary = linkml.generators.summarygen:cli
           - gen-terminusdb = linkml.generators.terminusdbgen:cli
           - gen-typescript = linkml.generators.typescriptgen:cli
+          - gen-yarrrml = linkml.generators.yarrrmlgen:cli
           - gen-yaml = linkml.generators.yamlgen:cli
           - gen-yuml = linkml.generators.yumlgen:cli
           - linkml = linkml.cli.main:linkml
@@ -124,8 +126,6 @@ outputs:
         - pandera >=${{ pandera_min }}
         - polars-lts-cpu >=${{ polars_lts_cpu_min }}
         - pyshacl >=${{ pyshacl_min }}
-        # remove after https://github.com/conda-forge/sphinx-click-feedstock/pull/41
-        - sphinx-click !=6.1.0 *_0
     tests:
       - python:
           imports: linkml
@@ -264,10 +264,10 @@ about:
   documentation: https://linkml.io/linkml
   repository: https://github.com/linkml/linkml
   description: |
-    LinkML is a flexible modeling language that allows you to author schemas in 
-    YAML that describe the structure of your data. Additionally, it is a 
-    framework for working with and validating data in a variety of formats 
-    (JSON, RDF, TSV), with generators for compiling LinkML schemas to other 
+    LinkML is a flexible modeling language that allows you to author schemas in
+    YAML that describe the structure of your data. Additionally, it is a
+    framework for working with and validating data in a variety of formats
+    (JSON, RDF, TSV), with generators for compiling LinkML schemas to other
     frameworks.
 
 extra:
