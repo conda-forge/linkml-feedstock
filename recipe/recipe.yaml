@@ -63,6 +63,7 @@ outputs:
           - gen-pydantic = linkml.generators.pydanticgen:cli
           - gen-python = linkml.generators.pythongen:cli
           - gen-rdf = linkml.generators.rdfgen:cli
+          - gen-rust = linkml.generators.rustgen.cli:cli
           - gen-shacl = linkml.generators.shaclgen:cli
           - gen-shex = linkml.generators.shexgen:cli
           - gen-sparql = linkml.generators.sparqlgen:cli
@@ -73,7 +74,7 @@ outputs:
           - gen-summary = linkml.generators.summarygen:cli
           - gen-terminusdb = linkml.generators.terminusdbgen:cli
           - gen-typescript = linkml.generators.typescriptgen:cli
-          - gen-yarrrml = "linkml.generators.yarrrmlgen:cli"
+          - gen-yarrrml = linkml.generators.yarrrmlgen:cli
           - gen-yaml = linkml.generators.yamlgen:cli
           - gen-yuml = linkml.generators.yumlgen:cli
           - linkml = linkml.cli.main:linkml
@@ -125,8 +126,6 @@ outputs:
         - pandera >=${{ pandera_min }}
         - polars-lts-cpu >=${{ polars_lts_cpu_min }}
         - pyshacl >=${{ pyshacl_min }}
-        # remove after https://github.com/conda-forge/sphinx-click-feedstock/pull/41
-        - sphinx-click !=6.1.0 *_0
     tests:
       - python:
           imports: linkml
