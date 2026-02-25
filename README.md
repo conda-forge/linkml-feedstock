@@ -7,7 +7,7 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/linkml-feedstoc
 About linkml
 ------------
 
-Home: https://linkml.io/
+Home: https://pypi.org/project/linkml
 
 Package license: Apache-2.0
 
@@ -26,7 +26,7 @@ frameworks.
 About linkml
 ------------
 
-Home: https://linkml.io/
+Home: https://pypi.org/project/linkml
 
 Package license: Apache-2.0
 
@@ -45,7 +45,7 @@ frameworks.
 About linkml-with-all
 ---------------------
 
-Home: https://linkml.io/
+Home: https://pypi.org/project/linkml
 
 Package license: Apache-2.0
 
@@ -64,7 +64,7 @@ frameworks.
 About linkml-with-numpydantic
 -----------------------------
 
-Home: https://linkml.io/
+Home: https://pypi.org/project/linkml
 
 Package license: Apache-2.0
 
@@ -83,7 +83,7 @@ frameworks.
 About linkml-with-pandera
 -------------------------
 
-Home: https://linkml.io/
+Home: https://pypi.org/project/linkml
 
 Package license: Apache-2.0
 
@@ -102,7 +102,7 @@ frameworks.
 About linkml-with-pyshacl
 -------------------------
 
-Home: https://linkml.io/
+Home: https://pypi.org/project/linkml
 
 Package license: Apache-2.0
 
