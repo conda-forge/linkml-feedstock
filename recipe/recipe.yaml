@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "1.9.6"
+  version: "1.10.0"
   python_check_max: "3.14"
   linkml_runtime_min: "1.9.5"
   numpydantic_min: "1.6.1"
@@ -16,10 +16,10 @@ recipe:
 
 source:
   - url: https://pypi.org/packages/source/l/linkml/linkml-${{ version }}.tar.gz
-    sha256: d2ef74bbb52bf5e48b67b5d9319ca2e4acb8184dd40bf43d00635222b2dc1d4c
+    sha256: ca70bba1474bc7de37edd33005a8a556d4718190584ab2c88f7c46d090477d55
     target_directory: dist
   - url: https://github.com/linkml/linkml/archive/refs/tags/v${{ version }}.tar.gz
-    sha256: 81606d9131eecd771c9fd215ebf7cd103bce43b8d77df27dd3f70a2cf61b4c85
+    sha256: bc93fa3bbf9e00e8f1e1d3da20cb4ccc2c000658f697fd8fe822f835a18c152d
     target_directory: src
 
 build:
