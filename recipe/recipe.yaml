@@ -159,7 +159,7 @@ outputs:
         - hbreader
         - isodate >=0.7.2,<1.0.0
         - json-flattener >=0.1.9
-        - jsonasobj2 >=1.0.0,>=1.0.4,==1.*
+        - jsonasobj2 >=1.0.0,>=1.0.4,1.*
         - jsonschema >=3.2.0
         - prefixcommons >=0.1.12
         - prefixmaps >=0.1.4
