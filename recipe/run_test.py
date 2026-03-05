@@ -1,6 +1,7 @@
 import sys
 from subprocess import call
 import tomli
+import shutil
 from pathlib import Path
 import os
 
@@ -35,7 +36,7 @@ if WIN:
     FAIL_UNDER -= 1
 
 SRC_DIR = Path(__file__).parent / "src"
-PYPROJECT = SRC_DIR / "pyproject.toml"
+PYPROJECT = SRC_DIR / "packages/linkml/pyproject.toml"
 PPT_DATA = tomli.loads(PYPROJECT.read_text(encoding="utf-8"))
 SCRIPTS = sorted(PPT_DATA["project"]["scripts"])
 SCRIPT_HELP = [[s, "--help"] for s in SCRIPTS]
@@ -45,6 +46,7 @@ TEST = [
     "coverage",
     "run",
     "--source=linkml",
+    "--source=linkml-runtime",
     "--branch",
     "-m",
     "pytest",
