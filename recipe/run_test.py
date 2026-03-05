@@ -1,7 +1,6 @@
 import sys
 from subprocess import call
 import tomli
-import shutil
 from pathlib import Path
 import os
 

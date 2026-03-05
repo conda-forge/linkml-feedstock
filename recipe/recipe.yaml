@@ -293,6 +293,8 @@ outputs:
             - src/notebooks/
             - src/packages/linkml/pyproject.toml
             - src/tests/
+            # required by `test_javagen_with_custom_template`
+            - src/packages/linkml/src/linkml/generators/javagen/class-records.jinja2
           recipe:
             - run_test.py
         requirements:
