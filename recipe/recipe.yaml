@@ -9,6 +9,7 @@ context:
   pandera_min: "0.19.0"
   polars_lts_cpu_min: "1.0.0"
   pyshacl_min: "0.25.0"
+  cov_fail_under: "71"
 
 recipe:
   name: linkml
@@ -293,8 +294,6 @@ outputs:
             - src/notebooks/
             - src/packages/linkml/pyproject.toml
             - src/tests/
-            # required by `test_javagen_with_custom_template`
-            - src/packages/linkml/src/linkml/generators/javagen/class-records.jinja2
           recipe:
             - run_test.py
         requirements:
@@ -312,6 +311,8 @@ outputs:
             - tomli
         script:
           file: run_test.py
+          env:
+            COV_FAIL_UNDER: ${{ cov_fail_under }}
     about:
       summary: Linked Open Data Modeling Language (with test suite)
 
