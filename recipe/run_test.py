@@ -64,6 +64,7 @@ TEST = [
     "-m",
     "pytest",
     "-vv",
+    "-n{}".format(os.environ.get("CPU_COUNT", "2")),
     "--tb=long",
     "--color=yes",
     "-k",
