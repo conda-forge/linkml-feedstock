@@ -7,7 +7,7 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/linkml-feedstoc
 About linkml
 ------------
 
-Home: https://linkml.io/
+Home: https://pypi.org/project/linkml
 
 Package license: Apache-2.0
 
@@ -26,7 +26,7 @@ frameworks.
 About linkml
 ------------
 
-Home: https://linkml.io/
+Home: https://pypi.org/project/linkml
 
 Package license: Apache-2.0
 
@@ -42,10 +42,29 @@ framework for working with and validating data in a variety of formats
 (JSON, RDF, TSV), with generators for compiling LinkML schemas to other
 frameworks.
 
+About linkml-runtime
+--------------------
+
+Home: https://pypi.org/project/linkml-runtime
+
+Package license: CC0-1.0
+
+Summary: Runtime environment for LinkML, the Linked open data modeling language
+
+Development: https://github.com/linkml/linkml/tree/main/packages/linkml_runtime
+
+Documentation: https://linkml.io/linkml
+
+LinkML is a flexible modeling language that allows you to author schemas in
+YAML that describe the structure of your data. Additionally, it is a
+framework for working with and validating data in a variety of formats
+(JSON, RDF, TSV), with generators for compiling LinkML schemas to other
+frameworks.
+
 About linkml-with-all
 ---------------------
 
-Home: https://linkml.io/
+Home: https://pypi.org/project/linkml
 
 Package license: Apache-2.0
 
@@ -64,7 +83,7 @@ frameworks.
 About linkml-with-numpydantic
 -----------------------------
 
-Home: https://linkml.io/
+Home: https://pypi.org/project/linkml
 
 Package license: Apache-2.0
 
@@ -83,7 +102,7 @@ frameworks.
 About linkml-with-pandera
 -------------------------
 
-Home: https://linkml.io/
+Home: https://pypi.org/project/linkml
 
 Package license: Apache-2.0
 
@@ -102,7 +121,7 @@ frameworks.
 About linkml-with-pyshacl
 -------------------------
 
-Home: https://linkml.io/
+Home: https://pypi.org/project/linkml
 
 Package license: Apache-2.0
 
@@ -138,6 +157,7 @@ Current release info
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-__linkml__with__all__tests-green.svg)](https://anaconda.org/conda-forge/_linkml_with_all_tests) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/_linkml_with_all_tests.svg)](https://anaconda.org/conda-forge/_linkml_with_all_tests) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/_linkml_with_all_tests.svg)](https://anaconda.org/conda-forge/_linkml_with_all_tests) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/_linkml_with_all_tests.svg)](https://anaconda.org/conda-forge/_linkml_with_all_tests) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-linkml-green.svg)](https://anaconda.org/conda-forge/linkml) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/linkml.svg)](https://anaconda.org/conda-forge/linkml) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/linkml.svg)](https://anaconda.org/conda-forge/linkml) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/linkml.svg)](https://anaconda.org/conda-forge/linkml) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-linkml--runtime-green.svg)](https://anaconda.org/conda-forge/linkml-runtime) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/linkml-runtime.svg)](https://anaconda.org/conda-forge/linkml-runtime) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/linkml-runtime.svg)](https://anaconda.org/conda-forge/linkml-runtime) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/linkml-runtime.svg)](https://anaconda.org/conda-forge/linkml-runtime) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-linkml--with--all-green.svg)](https://anaconda.org/conda-forge/linkml-with-all) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/linkml-with-all.svg)](https://anaconda.org/conda-forge/linkml-with-all) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/linkml-with-all.svg)](https://anaconda.org/conda-forge/linkml-with-all) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/linkml-with-all.svg)](https://anaconda.org/conda-forge/linkml-with-all) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-linkml--with--numpydantic-green.svg)](https://anaconda.org/conda-forge/linkml-with-numpydantic) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/linkml-with-numpydantic.svg)](https://anaconda.org/conda-forge/linkml-with-numpydantic) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/linkml-with-numpydantic.svg)](https://anaconda.org/conda-forge/linkml-with-numpydantic) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/linkml-with-numpydantic.svg)](https://anaconda.org/conda-forge/linkml-with-numpydantic) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-linkml--with--pandera-green.svg)](https://anaconda.org/conda-forge/linkml-with-pandera) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/linkml-with-pandera.svg)](https://anaconda.org/conda-forge/linkml-with-pandera) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/linkml-with-pandera.svg)](https://anaconda.org/conda-forge/linkml-with-pandera) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/linkml-with-pandera.svg)](https://anaconda.org/conda-forge/linkml-with-pandera) |
@@ -153,16 +173,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `_linkml_with_all_tests, linkml, linkml-with-all, linkml-with-numpydantic, linkml-with-pandera, linkml-with-pyshacl` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `_linkml_with_all_tests, linkml, linkml-runtime, linkml-with-all, linkml-with-numpydantic, linkml-with-pandera, linkml-with-pyshacl` can be installed with `conda`:
 
 ```
-conda install _linkml_with_all_tests linkml linkml-with-all linkml-with-numpydantic linkml-with-pandera linkml-with-pyshacl
+conda install _linkml_with_all_tests linkml linkml-runtime linkml-with-all linkml-with-numpydantic linkml-with-pandera linkml-with-pyshacl
 ```
 
 or with `mamba`:
 
 ```
-mamba install _linkml_with_all_tests linkml linkml-with-all linkml-with-numpydantic linkml-with-pandera linkml-with-pyshacl
+mamba install _linkml_with_all_tests linkml linkml-runtime linkml-with-all linkml-with-numpydantic linkml-with-pandera linkml-with-pyshacl
 ```
 
 It is possible to list all of the versions of `_linkml_with_all_tests` available on your platform with `conda`:

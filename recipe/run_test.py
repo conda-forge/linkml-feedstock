@@ -4,9 +4,12 @@ import tomli
 from pathlib import Path
 import os
 
-FAIL_UNDER = 80
-
 WIN = os.name == "nt"
+LINUX = os.name == "linux"
+
+# https://github.com/conda-forge/linkml-feedstock/pull/6
+# as of merging with linkml-runtime, non-linux coverage is unknown (#6)
+FAIL_UNDER = os.environ.get("COV_FAIL_UNDER") if LINUX else None
 
 SKIPS = [
     # Expected errors in json schema validation, but none found
@@ -23,6 +26,12 @@ SKIPS = [
     "(test_pydanticgen and test_arrays_anyshape_json_schema)",
 ]
 
+SKIPS += [
+    # https://github.com/conda-forge/linkml-feedstock/pull/6
+    #: missing fixture file
+    "javagen_with_custom_template",
+]
+
 if WIN:
     SKIPS += [
         # probably related to fixture line endings?
@@ -32,23 +41,30 @@ if WIN:
         "test_metamodel_valid_call",
         "test_models_markdown",
     ]
-    FAIL_UNDER -= 1
+
 
 SRC_DIR = Path(__file__).parent / "src"
 PYPROJECT = SRC_DIR / "pyproject.toml"
-PPT_DATA = tomli.loads(PYPROJECT.read_text(encoding="utf-8"))
+COVRC_TOML = SRC_DIR / ".coveragerc.toml"
+LINKML_PYPROJECT = SRC_DIR / "packages/linkml/pyproject.toml"
+PPT_DATA = tomli.loads(LINKML_PYPROJECT.read_text(encoding="utf-8"))
 SCRIPTS = sorted(PPT_DATA["project"]["scripts"])
 SCRIPT_HELP = [[s, "--help"] for s in SCRIPTS]
-
+COVRC_TOML_CONTENT = """
+[run]
+source_pkgs = ["linkml", "linkml_runtime"]
+"""
 
 TEST = [
     "coverage",
     "run",
     "--source=linkml",
+    "--source=linkml_runtime",
     "--branch",
     "-m",
     "pytest",
     "-vv",
+    "-n{}".format(os.environ.get("CPU_COUNT", "2")),
     "--tb=long",
     "--color=yes",
     "-k",
@@ -60,7 +76,7 @@ REPORT = [
     "report",
     "--show-missing",
     "--skip-covered",
-    f"--fail-under={FAIL_UNDER}",
+   *([f"--fail-under={FAIL_UNDER}"] if FAIL_UNDER else []),
 ]
 
 
@@ -70,10 +86,11 @@ def do(*args: str):
 
 
 if __name__ == "__main__":
+    COVRC_TOML.write_text(COVRC_TOML_CONTENT, encoding="utf-8")
     for script in [*SCRIPT_HELP, TEST, REPORT]:
         print("\n>>>", *script, "\n", flush=True)
         rc = call(script, cwd=str(SRC_DIR))
         if rc != 0:
-            print("!!! error", rc, ":", *script)
+            print(f"!!! error {rc} for:", *script)
             sys.exit(rc)
     sys.exit(0)
