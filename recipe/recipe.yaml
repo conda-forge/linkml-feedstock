@@ -147,7 +147,6 @@ outputs:
         - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
       python:
         entry_points:
-          - comparefiles = linkml_runtime.utils.comparefiles:cli
           - linkml-normalize = linkml_runtime.processing.referencevalidator:cli
     requirements:
       host:
@@ -156,7 +155,7 @@ outputs:
         - python ${{ python_min }}.*
         - uv-dynamic-versioning
       run:
-        - click
+        - click >=8.2
         - curies >=0.5.4
         - deprecated
         - hbreader
