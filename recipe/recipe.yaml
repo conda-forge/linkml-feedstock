@@ -183,7 +183,6 @@ outputs:
           run:
             - python ${{ python_min }}.*
         script:
-          - comparefiles --help
           - linkml-normalize --help
     about:
       summary: Runtime environment for LinkML, the Linked open data modeling language
@@ -292,9 +291,10 @@ outputs:
     tests:
       - files:
           source:
-            - src/pyproject.toml
             - src/notebooks/
             - src/packages/linkml/pyproject.toml
+            - src/pyproject.toml
+            - src/scripts/generate_dashboard.py
             - src/tests/
           recipe:
             - run_test.py
@@ -313,10 +313,11 @@ outputs:
             - requests-cache >=1.2.0,<2.0.0
             - testcontainers
             - tomli
+            - pytest-html
         script:
-          file: run_test.py
           env:
             COV_FAIL_UNDER: ${{ cov_fail_under }}
+          file: run_test.py
     about:
       summary: Linked Open Data Modeling Language (with test suite)
 

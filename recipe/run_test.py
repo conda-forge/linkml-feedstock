@@ -69,6 +69,9 @@ TEST = [
     "--color=yes",
     "-k",
     f"""not ({" or ".join(SKIPS)})""",
+    # really only useful for local debugging, but...
+    "--html=pytest.html",
+    "--self-contained-html",
 ]
 
 REPORT = [
@@ -76,7 +79,7 @@ REPORT = [
     "report",
     "--show-missing",
     "--skip-covered",
-   *([f"--fail-under={FAIL_UNDER}"] if FAIL_UNDER else []),
+    *([f"--fail-under={FAIL_UNDER}"] if FAIL_UNDER else []),
 ]
 
 
