@@ -3,12 +3,16 @@ schema_version: 1
 
 context:
   version: "1.12.0"
+  pip_args: pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check --check-build-dependencies
   python_check_max: "3.14"
+  # only barely tested by import
   linkml_runtime_min: "1.10.0"
+  # semi-tested by import in extras
   numpydantic_min: "1.10.0"
   pandera_min: "0.33.1"
   polars_lts_cpu_min: "1.0.0"
   pyshacl_min: "0.40.1"
+  # not very meaningful, but useful for observing big dependency changes (e.g. missing extras)
   cov_fail_under: "71"
 
 recipe:
@@ -37,7 +41,7 @@ outputs:
       noarch: python
       script:
         - cd linkml
-        - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
+        - ${{ PYTHON }} -m ${{ pip_args }}
       python:
         entry_points:
           - gen-bigquery = linkml.generators.bigquerygen:cli
@@ -135,6 +139,11 @@ outputs:
         - polars-lts-cpu >=${{ polars_lts_cpu_min }}
         - pyshacl >=${{ pyshacl_min }}
     tests:
+      - package_contents:
+          strict: true
+          site_packages:
+            - linkml/**
+            - linkml-${{ version }}.dist-info/**
       - python:
           imports: linkml
           pip_check: true
@@ -148,7 +157,7 @@ outputs:
       noarch: python
       script:
         - cd linkml-runtime
-        - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
+        - ${{ PYTHON }} -m ${{ pip_args }}
       python:
         entry_points:
           - linkml-normalize = linkml_runtime.processing.referencevalidator:cli
@@ -175,6 +184,11 @@ outputs:
         - rdflib >=7.6.0
         - requests
     tests:
+      - package_contents:
+          strict: true
+          site_packages:
+            - linkml_runtime/**
+            - linkml_runtime-${{ version }}.dist-info/**
       - python:
           imports:
             - linkml_runtime
