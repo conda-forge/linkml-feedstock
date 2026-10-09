@@ -5,10 +5,10 @@ context:
   version: "1.11.1"
   python_check_max: "3.14"
   linkml_runtime_min: "1.10.0"
-  numpydantic_min: "1.6.1"
-  pandera_min: "0.19.0"
+  numpydantic_min: "1.10.0"
+  pandera_min: "0.33.1"
   polars_lts_cpu_min: "1.0.0"
-  pyshacl_min: "0.25.0"
+  pyshacl_min: "0.40.1"
   cov_fail_under: "71"
 
 recipe:
@@ -40,6 +40,7 @@ outputs:
         - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
       python:
         entry_points:
+          - gen-bigquery = linkml.generators.bigquerygen:cli
           - gen-cpp-header = linkml.generators.cppgen:cli
           - gen-csv = linkml.generators.csvgen:cli
           - gen-dbml = linkml.generators.dbmlgen:cli
@@ -75,8 +76,8 @@ outputs:
           - gen-sqla = linkml.generators.sqlalchemygen:cli
           - gen-sqlddl = linkml.generators.sqltablegen:cli
           - gen-sqltables = linkml.generators.sqltablegen:cli
-          - gen-sssom = linkml.generators.sssomgen:cli
           - gen-sqlvalidation = linkml.generators.sqlvalidationgen:cli
+          - gen-sssom = linkml.generators.sssomgen:cli
           - gen-summary = linkml.generators.summarygen:cli
           - gen-terminusdb = linkml.generators.terminusdbgen:cli
           - gen-typedb = linkml.generators.typedbgen:cli
@@ -104,24 +105,27 @@ outputs:
         - isodate >=0.6.0
         - jinja2 >=3.1.0
         - jsonasobj2 >=1.0.3,<2.0.0
-        - jsonschema-with-format >=4.0.0
+        - jsonschema-with-format >=4.26.0
         - linkml-runtime >=${{ linkml_runtime_min }},<2.0.0
+        - openapi-spec-validator >=0.8.4
         - openpyxl
         - parse
+        - platformdirs >=4.12.1
         - prefixcommons >=0.1.7
         - prefixmaps >=0.2.2
-        - pydantic >=2.0.0,<3.0.0
-        - pyjsg >=0.11.6
-        - pyshex >=0.7.20
-        - pyshexc >=0.8.3
+        - pydantic >=2.13.5,<3.0
+        - pydantic-settings >=2.15.0
+        - pyjsg >=0.12.3
+        - pyshex >=0.9.0
+        - pyshexc >=0.10.3
         - python >=${{ python_min }}
         - python-dateutil
         - python-graphviz >=0.10.1
         - pyyaml
-        - rdflib >=6.0.0
+        - rdflib >=7.6.0
         - requests >=2.22
         - sphinx-click >=6.0.0
-        - sqlalchemy >=1.4.31
+        - sqlalchemy >=2.0.54
         - typing_extensions >=4.6.0
         - watchdog >=0.9.0
       run_constraints:
@@ -156,19 +160,19 @@ outputs:
         - uv-dynamic-versioning
       run:
         - click >=8.2
-        - curies >=0.5.4
+        - curies >=0.14.6
         - deprecated
         - hbreader
-        - isodate >=0.7.2,<1.0.0
         - json-flattener >=0.1.9
         - jsonasobj2 >=1.0.4,<2
-        - jsonschema >=3.2.0
+        - jsonschema >=4.26.0
         - prefixcommons >=0.1.12
         - prefixmaps >=0.1.4
-        - pydantic >=1.10.2,<3.0.0
+        - pydantic >=2.13.5,<3.0.0
+        - pyoxigraph >=0.5.11
         - python >=${{ python_min }}
         - pyyaml
-        - rdflib >=6.0.0
+        - rdflib >=7.6.0
         - requests
     tests:
       - python:
@@ -300,20 +304,23 @@ outputs:
             - run_test.py
         requirements:
           run:
-            - coverage >=6.4.1,<7.0.0
-            - gql >=4.0.0
+            - coverage >=7.16.2
+            - duckdb >=1.5.5
+            - gql >=4.4.0
             - jsonpatch >=1.33.0,<2.0.0
             - mock >=5.1.0,<6
             - nbconvert
             - openapi-spec-validator >=0.8.4
             - pytest >=7.4.0,<8.0.0
+            - pytest-html
             - pytest-subtests >=0.11.0,<0.12.0
             - pytest-xdist
             - python ${{ python_min }}.*
             - requests-cache >=1.2.0,<2.0.0
+            - sqlalchemy-bigquery >=1.17.2"
             - testcontainers
             - tomli
-            - pytest-html
+            - tomli-w >=1.2.0
         script:
           env:
             COV_FAIL_UNDER: ${{ cov_fail_under }}
