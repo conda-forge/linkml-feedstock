@@ -331,7 +331,7 @@ outputs:
             - pytest-xdist
             - python ${{ python_min }}.*
             - requests-cache >=1.2.0,<2.0.0
-            - sqlalchemy-bigquery >=1.17.2"
+            - sqlalchemy-bigquery >=1.17.2
             - testcontainers
             - tomli
             - tomli-w >=1.2.0
