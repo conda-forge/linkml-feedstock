@@ -17,12 +17,6 @@ Development: https://github.com/linkml/linkml
 
 Documentation: https://linkml.io/linkml
 
-LinkML is a flexible modeling language that allows you to author schemas in
-YAML that describe the structure of your data. Additionally, it is a
-framework for working with and validating data in a variety of formats
-(JSON, RDF, TSV), with generators for compiling LinkML schemas to other
-frameworks.
-
 About linkml
 ------------
 
@@ -55,12 +49,6 @@ Development: https://github.com/linkml/linkml/tree/main/packages/linkml_runtime
 
 Documentation: https://linkml.io/linkml
 
-LinkML is a flexible modeling language that allows you to author schemas in
-YAML that describe the structure of your data. Additionally, it is a
-framework for working with and validating data in a variety of formats
-(JSON, RDF, TSV), with generators for compiling LinkML schemas to other
-frameworks.
-
 About linkml-with-all
 ---------------------
 
@@ -68,17 +56,11 @@ Home: https://pypi.org/project/linkml
 
 Package license: Apache-2.0
 
-Summary: Linked Open Data Modeling Language (with all)
+Summary: Linked Open Data Modeling Language (with [all])
 
 Development: https://github.com/linkml/linkml
 
 Documentation: https://linkml.io/linkml
-
-LinkML is a flexible modeling language that allows you to author schemas in
-YAML that describe the structure of your data. Additionally, it is a
-framework for working with and validating data in a variety of formats
-(JSON, RDF, TSV), with generators for compiling LinkML schemas to other
-frameworks.
 
 About linkml-with-numpydantic
 -----------------------------
@@ -87,17 +69,11 @@ Home: https://pypi.org/project/linkml
 
 Package license: Apache-2.0
 
-Summary: Linked Open Data Modeling Language (with numpydantic)
+Summary: Linked Open Data Modeling Language (with [numpydantic])
 
 Development: https://github.com/linkml/linkml
 
 Documentation: https://linkml.io/linkml
-
-LinkML is a flexible modeling language that allows you to author schemas in
-YAML that describe the structure of your data. Additionally, it is a
-framework for working with and validating data in a variety of formats
-(JSON, RDF, TSV), with generators for compiling LinkML schemas to other
-frameworks.
 
 About linkml-with-pandera
 -------------------------
@@ -106,17 +82,11 @@ Home: https://pypi.org/project/linkml
 
 Package license: Apache-2.0
 
-Summary: Linked Open Data Modeling Language (with pandera)
+Summary: Linked Open Data Modeling Language (with [pandera])
 
 Development: https://github.com/linkml/linkml
 
 Documentation: https://linkml.io/linkml
-
-LinkML is a flexible modeling language that allows you to author schemas in
-YAML that describe the structure of your data. Additionally, it is a
-framework for working with and validating data in a variety of formats
-(JSON, RDF, TSV), with generators for compiling LinkML schemas to other
-frameworks.
 
 About linkml-with-pyshacl
 -------------------------
@@ -125,17 +95,11 @@ Home: https://pypi.org/project/linkml
 
 Package license: Apache-2.0
 
-Summary: Linked Open Data Modeling Language (with pyshacl)
+Summary: Linked Open Data Modeling Language (with [pyshacl])
 
 Development: https://github.com/linkml/linkml
 
 Documentation: https://linkml.io/linkml
-
-LinkML is a flexible modeling language that allows you to author schemas in
-YAML that describe the structure of your data. Additionally, it is a
-framework for working with and validating data in a variety of formats
-(JSON, RDF, TSV), with generators for compiling LinkML schemas to other
-frameworks.
 
 Current build status
 ====================
