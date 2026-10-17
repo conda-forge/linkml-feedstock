@@ -2,11 +2,11 @@
 schema_version: 1
 
 context:
-  version: "1.12.0"
+  version: "1.12.1"
   pip_args: pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check --check-build-dependencies
-  python_check_max: "3.14"
+  python_check_max: "3.15"
   # only barely tested by import
-  linkml_runtime_min: "1.10.0"
+  linkml_runtime_min: "1.12.1"
   # semi-tested by import in extras
   numpydantic_min: "1.10.0"
   pandera_min: "0.33.1"
@@ -21,13 +21,13 @@ recipe:
 
 source:
   - url: https://github.com/linkml/linkml/archive/refs/tags/v${{ version }}.tar.gz
-    sha256: 3c21499107fdcdca5ccf773b1fe7d5c37c9a04f9ff7d174acf4fec57b4d462f1
+    sha256: 55632c828c6a37cff874e6bd8d8add84f065f9d62576a42009b51c265766f467
     target_directory: src
   - url: https://pypi.org/packages/source/l/linkml/linkml-${{ version }}.tar.gz
-    sha256: c35fb852a6b1b50fdeb22c18b0a0894e072ca6cac8639ecf0de088de7db6265c
+    sha256: dfaf32cba7f8e5e2fb8d3b5177087fae55c6475e387de2ca93f1449a723f3d12
     target_directory: linkml
   - url: https://pypi.org/packages/source/l/linkml-runtime/linkml_runtime-${{ version }}.tar.gz
-    sha256: 319b8696d81ad5a259540a64559cced3e85594429af466783dcf0959885c564f
+    sha256: 6e46e94712ac6ab97baab9a0a1689c72e0035d8e3546c57abbf809760226ff9b
     target_directory: linkml-runtime
 
 build:
@@ -104,7 +104,7 @@ outputs:
         - uv-dynamic-versioning
       run:
         - antlr4-python3-runtime >=4.9.0,<4.10
-        - click >=8.2
+        - click >=8.3.3
         - hbreader
         - isodate >=0.6.0
         - jinja2 >=3.1.0
@@ -114,7 +114,7 @@ outputs:
         - openapi-spec-validator >=0.8.4
         - openpyxl
         - parse
-        - platformdirs >=4.12.1
+        - platformdirs >=4.12.2
         - prefixcommons >=0.1.7
         - prefixmaps >=0.2.2
         - pydantic >=2.13.5,<3.0
