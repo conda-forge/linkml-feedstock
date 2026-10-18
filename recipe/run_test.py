@@ -1,6 +1,6 @@
 import sys
 from subprocess import call
-import tomli
+import tomllib
 from pathlib import Path
 import os
 
@@ -54,12 +54,13 @@ SRC_DIR = Path(__file__).parent / "src"
 PYPROJECT = SRC_DIR / "pyproject.toml"
 COVRC_TOML = SRC_DIR / ".coveragerc.toml"
 LINKML_PYPROJECT = SRC_DIR / "packages/linkml/pyproject.toml"
-PPT_DATA = tomli.loads(LINKML_PYPROJECT.read_text(encoding="utf-8"))
+PPT_DATA = tomllib.loads(LINKML_PYPROJECT.read_text(encoding="utf-8"))
 SCRIPTS = sorted(PPT_DATA["project"]["scripts"])
 SCRIPT_HELP = [[s, "--help"] for s in SCRIPTS]
 COVRC_TOML_CONTENT = """
 [run]
 source_pkgs = ["linkml", "linkml_runtime"]
+patch = ["subprocess"]
 """
 
 TEST = [
@@ -71,14 +72,10 @@ TEST = [
     "-m",
     "pytest",
     "-vv",
-    "-n{}".format(os.environ.get("CPU_COUNT", "2")),
     "--tb=long",
     "--color=yes",
     "-k",
     f"""not ({" or ".join(SKIPS)})""",
-    # really only useful for local debugging, but...
-    "--html=pytest.html",
-    "--self-contained-html",
 ]
 
 REPORT = [

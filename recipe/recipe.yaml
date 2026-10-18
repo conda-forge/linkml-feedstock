@@ -321,11 +321,12 @@ outputs:
     tests:
       - files:
           source:
-            - src/notebooks/
+            - src/notebooks/**
+            - src/packages/linkml_runtime/generate_vendored_manifest.py
             - src/packages/linkml/pyproject.toml
             - src/pyproject.toml
             - src/scripts/generate_dashboard.py
-            - src/tests/
+            - src/tests/**
           recipe:
             - run_test.py
         requirements:
@@ -333,14 +334,13 @@ outputs:
             - coverage >=7.16.2
             - duckdb >=1.5.5
             - gql >=4.4.0
+            - ipykernel
             - jsonpatch >=1.33.0,<2.0.0
             - mock >=5.1.0,<6
             - nbconvert
             - openapi-spec-validator >=0.8.4
             - pytest >=7.4.0,<8.0.0
-            - pytest-html
             - pytest-subtests >=0.11.0,<0.12.0
-            - pytest-xdist
             - python ${{ python_min }}.*
             - requests-cache >=1.2.0,<2.0.0
             - sqlalchemy-bigquery >=1.17.2
@@ -350,7 +350,8 @@ outputs:
         script:
           env:
             COV_FAIL_UNDER: ${{ cov_fail_under }}
-          file: run_test.py
+          content:
+            - python run_test.py
     about:
       summary: ${{ summary }} (with test suite)
 
