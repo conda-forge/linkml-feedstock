@@ -2,14 +2,19 @@
 schema_version: 1
 
 context:
-  version: "1.11.1"
-  python_check_max: "3.14"
-  linkml_runtime_min: "1.10.0"
-  numpydantic_min: "1.6.1"
-  pandera_min: "0.19.0"
+  version: "1.12.1"
+  pip_args: pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check --check-build-dependencies
+  python_check_max: "3.15"
+  # only barely tested by import
+  linkml_runtime_min: "1.12.1"
+  # semi-tested by import in extras
+  numpydantic_min: "1.10.0"
+  pandera_min: "0.33.1"
   polars_lts_cpu_min: "1.0.0"
-  pyshacl_min: "0.25.0"
+  pyshacl_min: "0.40.1"
+  # not very meaningful, but useful for observing big dependency changes (e.g. missing extras)
   cov_fail_under: "71"
+  summary: Linked Open Data Modeling Language
 
 recipe:
   name: linkml
@@ -17,13 +22,13 @@ recipe:
 
 source:
   - url: https://github.com/linkml/linkml/archive/refs/tags/v${{ version }}.tar.gz
-    sha256: 1993719bdc8a30db4ba1f48ec065894809fb9cc53a56702310bd9be66fa4cd70
+    sha256: 55632c828c6a37cff874e6bd8d8add84f065f9d62576a42009b51c265766f467
     target_directory: src
   - url: https://pypi.org/packages/source/l/linkml/linkml-${{ version }}.tar.gz
-    sha256: 2f6774e13628270cadaeecda3313db0437ecc15cd44ee35c6c2655dbe31c8524
+    sha256: dfaf32cba7f8e5e2fb8d3b5177087fae55c6475e387de2ca93f1449a723f3d12
     target_directory: linkml
   - url: https://pypi.org/packages/source/l/linkml-runtime/linkml_runtime-${{ version }}.tar.gz
-    sha256: e71300b596c4f35aeccd9dca096806678402213dbdb2c5e8e68f507e21320754
+    sha256: 6e46e94712ac6ab97baab9a0a1689c72e0035d8e3546c57abbf809760226ff9b
     target_directory: linkml-runtime
 
 build:
@@ -37,9 +42,10 @@ outputs:
       noarch: python
       script:
         - cd linkml
-        - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
+        - ${{ PYTHON }} -m ${{ pip_args }}
       python:
         entry_points:
+          - gen-bigquery = linkml.generators.bigquerygen:cli
           - gen-cpp-header = linkml.generators.cppgen:cli
           - gen-csv = linkml.generators.csvgen:cli
           - gen-dbml = linkml.generators.dbmlgen:cli
@@ -75,8 +81,8 @@ outputs:
           - gen-sqla = linkml.generators.sqlalchemygen:cli
           - gen-sqlddl = linkml.generators.sqltablegen:cli
           - gen-sqltables = linkml.generators.sqltablegen:cli
-          - gen-sssom = linkml.generators.sssomgen:cli
           - gen-sqlvalidation = linkml.generators.sqlvalidationgen:cli
+          - gen-sssom = linkml.generators.sssomgen:cli
           - gen-summary = linkml.generators.summarygen:cli
           - gen-terminusdb = linkml.generators.terminusdbgen:cli
           - gen-typedb = linkml.generators.typedbgen:cli
@@ -90,7 +96,6 @@ outputs:
           - linkml-sqldb = linkml.utils.sqlutils:main
           - linkml-validate = linkml.validator.cli:cli
           - run-tutorial = linkml.utils.execute_tutorial:cli
-
     requirements:
       host:
         - hatchling
@@ -99,29 +104,32 @@ outputs:
         - uv-dynamic-versioning
       run:
         - antlr4-python3-runtime >=4.9.0,<4.10
-        - click >=8.2
+        - click >=8.3.3
         - hbreader
         - isodate >=0.6.0
         - jinja2 >=3.1.0
         - jsonasobj2 >=1.0.3,<2.0.0
-        - jsonschema-with-format >=4.0.0
+        - jsonschema-with-format >=4.26.0
         - linkml-runtime >=${{ linkml_runtime_min }},<2.0.0
+        - openapi-spec-validator >=0.8.4
         - openpyxl
         - parse
+        - platformdirs >=4.12.2
         - prefixcommons >=0.1.7
         - prefixmaps >=0.2.2
-        - pydantic >=2.0.0,<3.0.0
-        - pyjsg >=0.11.6
-        - pyshex >=0.7.20
-        - pyshexc >=0.8.3
+        - pydantic >=2.13.5,<3.0
+        - pydantic-settings >=2.15.0
+        - pyjsg >=0.12.3
+        - pyshex >=0.9.0
+        - pyshexc >=0.10.3
         - python >=${{ python_min }}
         - python-dateutil
         - python-graphviz >=0.10.1
         - pyyaml
-        - rdflib >=6.0.0
+        - rdflib >=7.6.0
         - requests >=2.22
         - sphinx-click >=6.0.0
-        - sqlalchemy >=1.4.31
+        - sqlalchemy >=2.0.54
         - typing_extensions >=4.6.0
         - watchdog >=0.9.0
       run_constraints:
@@ -131,12 +139,24 @@ outputs:
         - polars-lts-cpu >=${{ polars_lts_cpu_min }}
         - pyshacl >=${{ pyshacl_min }}
     tests:
+      - package_contents:
+          strict: true
+          site_packages:
+            - linkml/**
+            - linkml-${{ version }}.dist-info/**
       - python:
           imports: linkml
           pip_check: true
           python_version:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
+    about:
+      description: |
+        LinkML is a flexible modeling language that allows you to author schemas in
+        YAML that describe the structure of your data. Additionally, it is a
+        framework for working with and validating data in a variety of formats
+        (JSON, RDF, TSV), with generators for compiling LinkML schemas to other
+        frameworks.
 
   - package:
       name: linkml-runtime
@@ -144,7 +164,7 @@ outputs:
       noarch: python
       script:
         - cd linkml-runtime
-        - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
+        - ${{ PYTHON }} -m ${{ pip_args }}
       python:
         entry_points:
           - linkml-normalize = linkml_runtime.processing.referencevalidator:cli
@@ -156,21 +176,26 @@ outputs:
         - uv-dynamic-versioning
       run:
         - click >=8.2
-        - curies >=0.5.4
+        - curies >=0.14.6
         - deprecated
         - hbreader
-        - isodate >=0.7.2,<1.0.0
         - json-flattener >=0.1.9
         - jsonasobj2 >=1.0.4,<2
-        - jsonschema >=3.2.0
+        - jsonschema >=4.26.0
         - prefixcommons >=0.1.12
         - prefixmaps >=0.1.4
-        - pydantic >=1.10.2,<3.0.0
+        - pydantic >=2.13.5,<3.0.0
+        - pyoxigraph >=0.5.11
         - python >=${{ python_min }}
         - pyyaml
-        - rdflib >=6.0.0
+        - rdflib >=7.6.0
         - requests
     tests:
+      - package_contents:
+          strict: true
+          site_packages:
+            - linkml_runtime/**
+            - linkml_runtime-${{ version }}.dist-info/**
       - python:
           imports:
             - linkml_runtime
@@ -200,6 +225,10 @@ outputs:
       run:
         - ${{ pin_subpackage("linkml", exact=True) }}
         - numpydantic
+      run_constraints:
+        # TODO: fix on numpydantic-feedstock
+        - pydantic >=2.7.0
+        - numpy >=2.0.0
     tests:
       - python:
           imports: linkml
@@ -208,7 +237,7 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
     about:
-      summary: Linked Open Data Modeling Language (with numpydantic)
+      summary: ${{ summary }} (with [numpydantic])
 
   - package:
       name: linkml-with-pandera
@@ -228,7 +257,7 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
     about:
-      summary: Linked Open Data Modeling Language (with pandera)
+      summary: ${{ summary }} (with [pandera])
 
   - package:
       name: linkml-with-pyshacl
@@ -246,7 +275,7 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
     about:
-      summary: Linked Open Data Modeling Language (with pyshacl)
+      summary: ${{ summary }} (with [pyshacl])
 
   # fan-in package of runtime ##################################################
   - package:
@@ -271,13 +300,14 @@ outputs:
             - numpydantic ${{ numpydantic_min }}.*
             - pandera ${{ pandera_min }}.*
             - pip
-            - polars-lts-cpu ${{ polars_lts_cpu_min }}.*
+            # breaks vs [numpydantic]
+            # - polars-lts-cpu ${{ polars_lts_cpu_min }}.*
             - pyshacl ${{ pyshacl_min }}.*
             - python ${{ python_min }}.*
         script:
           - pip check
     about:
-      summary: Linked Open Data Modeling Language (with all)
+      summary: ${{ summary }} (with [all])
 
   # test-only package ##########################################################
   - package:
@@ -291,49 +321,53 @@ outputs:
     tests:
       - files:
           source:
-            - src/notebooks/
+            - src/examples/PersonSchema/personinfo.yaml
+            - src/notebooks/**
+            - src/packages/linkml_runtime/generate_vendored_manifest.py
             - src/packages/linkml/pyproject.toml
             - src/pyproject.toml
             - src/scripts/generate_dashboard.py
-            - src/tests/
+            - src/tests/**
           recipe:
             - run_test.py
         requirements:
           run:
-            - coverage >=6.4.1,<7.0.0
-            - gql >=4.0.0
+            - coverage >=7.16.2
+            - duckdb >=1.5.5
+            - gql >=4.4.0
+            - ipykernel
             - jsonpatch >=1.33.0,<2.0.0
             - mock >=5.1.0,<6
             - nbconvert
             - openapi-spec-validator >=0.8.4
             - pytest >=7.4.0,<8.0.0
             - pytest-subtests >=0.11.0,<0.12.0
-            - pytest-xdist
             - python ${{ python_min }}.*
             - requests-cache >=1.2.0,<2.0.0
+            - sqlalchemy-bigquery >=1.17.2
             - testcontainers
             - tomli
-            - pytest-html
+            - tomli-w >=1.2.0
+            # used in some notebooks via `%uv` magic
+            - uv
+            # not well specified, but as appearing in upstream `uv.lock`
+            - polars-lts-cpu 1.33.*
+            - pandera 0.33.*
         script:
           env:
             COV_FAIL_UNDER: ${{ cov_fail_under }}
-          file: run_test.py
+          content:
+            - python run_test.py
     about:
-      summary: Linked Open Data Modeling Language (with test suite)
+      summary: ${{ summary }} (with test suite)
 
 about:
-  summary: Linked Open Data Modeling Language
+  summary: ${{ summary }}
   license: Apache-2.0
   license_file: src/LICENSE
   homepage: https://pypi.org/project/linkml
   documentation: https://linkml.io/linkml
   repository: https://github.com/linkml/linkml
-  description: |
-    LinkML is a flexible modeling language that allows you to author schemas in
-    YAML that describe the structure of your data. Additionally, it is a
-    framework for working with and validating data in a variety of formats
-    (JSON, RDF, TSV), with generators for compiling LinkML schemas to other
-    frameworks.
 
 extra:
   feedstock-name: linkml
