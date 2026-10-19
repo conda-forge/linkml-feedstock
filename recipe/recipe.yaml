@@ -321,6 +321,7 @@ outputs:
     tests:
       - files:
           source:
+            - src/examples/PersonSchema/personinfo.yaml
             - src/notebooks/**
             - src/packages/linkml_runtime/generate_vendored_manifest.py
             - src/packages/linkml/pyproject.toml
@@ -347,6 +348,11 @@ outputs:
             - testcontainers
             - tomli
             - tomli-w >=1.2.0
+            # used in some notebooks via `%uv` magic
+            - uv
+            # not well specified, but as appearing in upstream `uv.lock`
+            - polars-lts-cpu 1.33.*
+            - pandera 0.33.*
         script:
           env:
             COV_FAIL_UNDER: ${{ cov_fail_under }}
